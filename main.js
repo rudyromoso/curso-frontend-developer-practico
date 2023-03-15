@@ -48,30 +48,34 @@ const iconMenu = document.querySelector('.menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const carritoCompra = document.querySelector('#ShoppingCartContainer');
 const listaDeProductos = document.querySelector('.cards-container');
-//const linkAll = document.querySelector('.linkAll');
+const productDetailContainer = document.querySelector('#ProductDetailContainer');
+const productDetailClose = document.querySelector('.product-detail-close');
 
 
 menuEmail.addEventListener('click', () => {
     desktopMenu.classList.toggle('inactive');
     carritoCompra.classList.add('inactive');
-}); 
+    productDetailContainer.classList.add('inactive');
+});
 
 shoppingCartIcon.addEventListener('click', () => {
     carritoCompra.classList.toggle('inactive');
     mobileMenu.classList.add('inactive');
     desktopMenu.classList.add('inactive');
-}); 
+    productDetailContainer.classList.add('inactive');
+   
+
+});
 iconMenu.addEventListener('click', () => {
     mobileMenu.classList.toggle('inactive');
     carritoCompra.classList.add('inactive');
-}); 
-
-// se trata de asociar la vista de la lista de producto al link ALL.
-/*
-linkAll.addEventListener('click', () => {
-    listaDeProductos.classList.toggle('inactive');  
+    productDetailContainer.classList.add('inactive');
 });
-*/
+
+productDetailClose.addEventListener('click', () => {
+    productDetailContainer.classList.add('inactive');
+});
+
 
 const productos = [];
 
@@ -103,11 +107,17 @@ function agregarProductosALaLista(productos) {
         img.src = 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
         img.alt = '';
 
+        img.addEventListener('click', () => {
+            productDetailContainer.classList.remove('inactive');
+            carritoCompra.classList.add('inactive');
+            desktopMenu.classList.add('inactive');
+        });
+
         const productInfo = document.createElement('div');
         productInfo.className = 'product-info';
 
         const productPrice = document.createElement('p');
-        productPrice.innerHTML =  "$ "+pr.valor.toLocaleString('es-CO');
+        productPrice.innerHTML = "$ " + pr.valor.toLocaleString('es-CO');
 
         const productName = document.createElement('p');
         productName.innerHTML = pr.descripcion;
